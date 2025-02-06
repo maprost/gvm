@@ -38,7 +38,7 @@ func (client) GetLatestVersion() (string, bool) {
 		return "", false
 	}
 
-	return string(versionBytes)[2:], true // cut 'go' prefix
+	return clearGoVersion(versionBytes, false), true
 }
 
 type WriteCounter struct {

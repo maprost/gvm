@@ -1,6 +1,9 @@
 # Go Version Manager
 
-The version manager is a small lightweight manager to install and change your `go` version on your system. 
+The version manager is a small lightweight manager to install and change your `go` version on your system.
+
+**Important:** you need an installed go version (root path: `/usr/local/go`), 
+also the root path need your user account as owner. 
 
 ## Install
 

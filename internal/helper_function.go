@@ -83,6 +83,10 @@ func currentGoVersion() string {
 		return "unknown"
 	}
 
+	return clearGoVersion(version, true)
+}
+
+func clearGoVersion(version []byte, withReleaseDate bool) string {
 	v := string(version)
 	v, _ = strings.CutPrefix(v, "go")
 	idx := strings.Index(v, "\n")
@@ -90,19 +94,20 @@ func currentGoVersion() string {
 		t := v[idx:]
 		v = v[:idx]
 
-		t = strings.ReplaceAll(t, "\n", "")
-		t = strings.ReplaceAll(t, " ", "")
-		t = strings.ReplaceAll(t, "time", "")
+		if withReleaseDate {
+			t = strings.ReplaceAll(t, "\n", "")
+			t = strings.ReplaceAll(t, " ", "")
+			t = strings.ReplaceAll(t, "time", "")
 
-		// convert to better time format
-		ti, err := time.Parse("2006-01-02T15:04:05Z", t)
-		if err == nil {
-			t = ti.Format("02.Jan 2006 15:04")
+			// convert to better time format
+			ti, err := time.Parse("2006-01-02T15:04:05Z", t)
+			if err == nil {
+				t = ti.Format("02.Jan 2006")
+			}
+
+			v += fmt.Sprintf(" (release date: %s)", t)
 		}
-
-		v += fmt.Sprintf(" (changed on %s)", t)
 	}
-
 	return v
 }
 
