@@ -1,29 +1,37 @@
-Go Version Manager
+# Go Version Manager
 
-The version manager is a small lightweight manager to use multiply versions of `go` on your system.
+The version manager is a small lightweight manager to install and change your `go` version on your system. 
+
+## Install
+
+`go get github.com/maprost/gvm`
+
+## Usage
 
 Fast usage: `gvm install latest` 
 
-## `gvm list`
+### `gvm list`
 
 List all go versions on the system.
 
-## `gvm get (versions|lastest)`
+### `gvm get (version|lastest)`
 
-Download the version.
+Download the version (latest versin).
 
-## `gvm install (version|lastest)`
+### `gvm install (version|lastest)`
 
 Download the version (if necessary) and configure the system to use this version. 
 
-## `gvm lock (version)`
+## Future implementation
+
+### `gvm lock (version)`
 
 The version is locked and can't delete by clear.
 
-## `gvm unlock (version)`
+### `gvm unlock (version)`
 
 The version is unlocked and can delete by clear.
 
-## `gvm clear`
+### `gvm clear`
 
 Clear all not locked versions, the last two version are also locked. 
