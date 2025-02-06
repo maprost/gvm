@@ -11,7 +11,7 @@ import (
 var Install Command
 
 func init() {
-	Install = newCommand("install", "install a version (eg: 1.17.8, latest), usage: gvm install [options] versions")
+	Install = newCommand("install", "download and use a version (eg: 1.17.8, latest), usage: gvm install [options] versions")
 	root := rootFlag(&Install)
 
 	Install.run = func() {

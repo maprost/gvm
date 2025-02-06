@@ -3,10 +3,11 @@ package internal
 import (
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 	"path/filepath"
 	"runtime"
+	"strings"
+	"time"
 )
 
 func homeDir() string {
@@ -38,11 +39,11 @@ func rootDir() string {
 }
 
 func Infoln(m ...interface{}) {
-	log.Println(m...)
+	fmt.Println(m...)
 }
 
 func Infof(msg string, p ...interface{}) {
-	log.Printf(msg, p...)
+	fmt.Printf(msg, p...)
 }
 
 var verbose *bool
@@ -82,7 +83,27 @@ func currentGoVersion() string {
 		return "unknown"
 	}
 
-	return string(version)[2:] // cut 'go' prefix
+	v := string(version)
+	v, _ = strings.CutPrefix(v, "go")
+	idx := strings.Index(v, "\n")
+	if idx != -1 {
+		t := v[idx:]
+		v = v[:idx]
+
+		t = strings.ReplaceAll(t, "\n", "")
+		t = strings.ReplaceAll(t, " ", "")
+		t = strings.ReplaceAll(t, "time", "")
+
+		// convert to better time format
+		ti, err := time.Parse("2006-01-02T15:04:05Z", t)
+		if err == nil {
+			t = ti.Format("02.Jan 2006 15:04")
+		}
+
+		v += fmt.Sprintf(" (changed on %s)", t)
+	}
+
+	return v
 }
 
 func getArch() string {
