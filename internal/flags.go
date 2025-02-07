@@ -5,7 +5,7 @@ func rootFlag(c *Command) *string {
 }
 
 func nFlag(c *Command) *int {
-	return c.Int("n", 3, "")
+	return c.Int("n", 5, "")
 }
 
 func verboseFlag(c *Command) {

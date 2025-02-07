@@ -25,6 +25,12 @@ Download the version (latest versin).
 
 Download the version (if necessary) and configure the system to use this version. 
 
+### `gvm clear [-n Int]`
+
+`-n` how much latest versions should stay
+
+Clear all old versions, default is that the last five version stay.
+
 ## Future implementation
 
 ### `gvm lock (version)`
@@ -34,7 +40,3 @@ The version is locked and can't delete by clear.
 ### `gvm unlock (version)`
 
 The version is unlocked and can delete by clear.
-
-### `gvm clear`
-
-Clear all not locked versions, the last two version are also locked. 

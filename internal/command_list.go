@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"fmt"
 	"os"
 	"sort"
 	"strings"
@@ -32,8 +33,14 @@ func ListFunc(home string) {
 		}
 
 		name := info.Name()
+		if strings.HasSuffix(name, ".tmp") {
+			continue
+		}
+
 		name = strings.TrimPrefix(name, "go")
 		name = strings.TrimSuffix(name, "."+zipType())
+		name += fmt.Sprintf("\t%dMB", info.Size()/1024/1024)
+
 		names = append(names, name)
 	}
 	_ = file.Close()

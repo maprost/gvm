@@ -11,7 +11,7 @@ func main() {
 		internal.Get,
 		internal.Install,
 		internal.List,
-		//internal.Clear,
+		internal.Clear,
 	}
 	commands.ParseAndRun(os.Args)
 }
