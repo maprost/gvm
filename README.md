@@ -40,8 +40,3 @@ The version is locked and can't delete by clear.
 ### `gvm unlock (version)`
 
 The version is unlocked and can delete by clear.
-
-# k1
-# k2
-# k3
-## kk2
