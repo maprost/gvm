@@ -55,6 +55,7 @@ func (wc *WriteCounter) Write(p []byte) (int, error) {
 }
 
 func (client) DownloadFile(filepath string, url string) error {
+	Infoln("Downloading ", url)
 	// Get the data
 	resp, err := http.Get(url)
 	if err != nil {

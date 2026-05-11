@@ -2,10 +2,12 @@ package internal
 
 import (
 	"os"
+	"os/exec"
 	"path/filepath"
 
-	"github.com/maprost/gvm/internal/osx"
 	"github.com/mholt/archiver/v3"
+
+	"github.com/maprost/gvm/internal/osx"
 )
 
 var Install Command
@@ -52,6 +54,8 @@ func InstallFunc(root string, home string, version string, client Client) {
 	if err != nil {
 		exit("can't copy go files", err.Error())
 	}
+
+	clearCache()
 
 	//// delete the file
 	//Run("rm", file)
@@ -127,4 +131,12 @@ func clearGoRoot(root string) bool {
 	}
 
 	return ok
+}
+
+func clearCache() {
+	cmd := exec.Command("go", "clean", "-cache")
+	err := cmd.Run()
+	if err != nil {
+		Infoln("can't clear cache:", err.Error())
+	}
 }
